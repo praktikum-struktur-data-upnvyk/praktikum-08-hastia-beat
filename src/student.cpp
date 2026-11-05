@@ -237,27 +237,34 @@ bool hapus(Node*& root, int nilai) {
     }
     if(nilai < root->data) {
         return hapus(root->left, nilai);
-    } else if (nilai > root->data) {
+    } 
+    else if (nilai > root->data) {
         return hapus(root->right, nilai);
-    } else {
+    } 
+    else {
         if(root->left == nullptr && root->right == nullptr) {
             delete root;
             root = nullptr;
-        } else if(root->left == nullptr) {
+        } 
+        else if(root->left == nullptr) {
             Node* temp = root;
             root = root->right;
             delete temp;
-        } else if(root->right == nullptr) {
-
+        } 
+        else if(root->right == nullptr) {
             Node* temp = root;
             root = root->left;
             delete temp;
+        } 
+        else {
+            const Node* temp = minimum(root->right);
+            root->data = temp->data;
+            return hapus(root->right, temp->data);
         }
-        const Node* temp = minimum(root->right);
-        root->data = temp->data;
-        return hapus(root->right, temp->data);
+        return true;
     }
 }
+
 
 // =============================================================================
 // SOAL 3 — termahalTerbeli                                              25 poin
